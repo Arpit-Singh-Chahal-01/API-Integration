@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JattHotels — Find your stay across India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">JattHotels <small>India Stays</small></div>
+    <nav class="site-nav">
+      <a href="#search">Search</a>
+      <a href="#hotel-grid">Hotels</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="stat-pill" id="statPill">Loading hotels…</div>
+  </div>
+</header>
+
+<section class="hero" id="search">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">500+ stays · 20 Indian cities</div>
+    <h1>Find a room that fits the trip, not the other way around.</h1>
+    <p class="sub">Search by city, hotel name, or ID. Filter by budget, rating, and location, then sort to find exactly what you're looking for.</p>
+
+    <div class="search-card">
+      <div class="search-row">
+        <div class="search-field">
+          <span class="icon">🔎</span>
+          <input type="text" id="searchInput" placeholder="Search by city, hotel name, or ID (e.g. Jaipur, Hotel Sky Utopia, 14)">
+        </div>
+        <button class="search-btn" id="searchBtn">Search</button>
+      </div>
+      <div class="quick-tags" id="quickTags"></div>
+    </div>
+  </div>
+</section>
+
+<main class="main-wrap">
+  <aside class="filters">
+    <h3>Filters <button id="resetFilters">Reset</button></h3>
+
+    <div class="filter-group">
+      <label class="group-label">Location</label>
+      <select id="locationFilter">
+        <option value="">All cities</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="group-label">Price range (₹ / night)</label>
+      <div class="range-row">
+        <input type="number" id="priceMin" placeholder="Min">
+        <input type="number" id="priceMax" placeholder="Max">
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label class="group-label">Minimum rating</label>
+      <div class="rating-options">
+        <label><input type="radio" name="rating" value="0" checked> Any rating</label>
+        <label><input type="radio" name="rating" value="3"> 3.0 ★ &amp; up</label>
+        <label><input type="radio" name="rating" value="4"> 4.0 ★ &amp; up</label>
+        <label><input type="radio" name="rating" value="4.5"> 4.5 ★ &amp; up</label>
+      </div>
+    </div>
+  </aside>
+
+  <section>
+    <div class="results-toolbar">
+      <div class="results-count" id="resultsCount">Loading…</div>
+      <div class="sort-wrap">
+        <label for="sortSelect">Sort by</label>
+        <select id="sortSelect">
+          <option value="relevance">Relevance</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating-desc">Rating: High to Low</option>
+          <option value="rating-asc">Rating: Low to High</option>
+          <option value="name-asc">Name: A to Z</option>
+          <option value="name-desc">Name: Z to A</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="active-filters" id="activeFilters"></div>
+
+    <div class="hotel-grid" id="hotelGrid">
+      <div class="loading-state">
+        <div class="spinner"></div>
+        Fetching hotels from the JattHotels API…
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-hero">
+      <button class="modal-close" id="modalClose">✕</button>
+      <img id="modalImg" src="" alt="">
+    </div>
+    <div class="modal-body">
+      <div class="modal-title-row">
+        <h2 id="modalTitle"></h2>
+        <span class="modal-rating" id="modalRating"></span>
+      </div>
+      <div class="modal-loc" id="modalLoc"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-gallery" id="modalGallery"></div>
+      <div class="modal-price-row">
+        <div class="modal-price" id="modalPrice"></div>
+        <button class="modal-cta">Check availability</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer" id="contact">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>JattHotels</h3>
+        <p>An independent search interface for discovering hotels across India — built to make comparing price, rating, and location effortless.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#search">Search hotels</a>
+        <a href="#hotelGrid">Browse all stays</a>
+        <a href="#">Popular cities</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>asc@gmail.com</p>
+        <p>+91 9587584967</p>
+        <p>Mon–Sat, 10am–7pm IST</p>
+      </div>
+      <div class="footer-col">
+        <h4>Feedback</h4>
+        <form class="feedback-form" id="feedbackForm">
+          <input type="text" placeholder="Your name" required>
+          <input type="email" placeholder="Your email" required>
+          <textarea rows="3" placeholder="Tell us what to improve…" required></textarea>
+          <button type="submit">Send feedback</button>
+        </form>
+        <div class="feedback-note" id="feedbackNote"></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 JattHotels. All rights reserved.</span>
+      <span>Interface made by Arpit Singh Chahal.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js">
+</script>
+
+</body>
+</html>
